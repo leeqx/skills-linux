@@ -79,6 +79,12 @@ void rwlock_benchmark(uint32_t max, const std::string &desc)
        pthread_rwlock_unlock(&lock);
     }
     END_BENCHMARK(max, desc);
+
+    for(uint32_t i = 0; i < max;i++) {
+        pthread_rwlock_wrlock(&lock);
+        pthread_rwlock_unlock(&lock);
+    }
+    END_BENCHMARK(max, desc);
 }
 
 void spinlock_benchmark(uint32_t max, const std::string &desc) {
