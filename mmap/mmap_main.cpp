@@ -5,10 +5,12 @@
 #include <errno.h>
 #include <fcntl.h>
 /**
+64位的程序虚拟地址从00400000 开始，前面有4MB的gap，堆（malloc,new)分配的内存前面总有16字节的多余分配用于存储前面一个未分配的内存大小（前面8个自己），以及当前chuck的大小（后面八个字节）注意小端
+
 虚拟地址范围     权限   在当前进程的偏移量   主设备：次设备号 inode   映射文件
 00400000-00401000 r-xp 00000000 00:50 12888685791                        /Users/nano/projects/skills-linux/mmap/a.out  #可读、可执行权限表示的是a.out的代码段
-00600000-00601000 r--p 00000000 00:50 12888685791                        /Users/nano/projects/skills-linux/mmap/a.out
-00601000-00602000 rw-p 00001000 00:50 12888685791                        /Users/nano/projects/skills-linux/mmap/a.out  #可读可写的权限表示的是a.out的数据段
+00600000-00601000 r--p 00000000 00:50 12888685791                        /Users/nano/projects/skills-linux/mmap/a.out  #data 段
+00601000-00602000 rw-p 00001000 00:50 12888685791                        /Users/nano/projects/skills-linux/mmap/a.out  #BSS可读可写的权限表示的是a.out的数据段
 01266000-01287000 rw-p 00000000 00:00 0                                  [heap]
 7fabcfc60000-7fabcfe23000 r-xp 00000000 08:01 2623731                    /usr/lib64/libc-2.17.so
 7fabcfe23000-7fabd0022000 ---p 001c3000 08:01 2623731                    /usr/lib64/libc-2.17.so
