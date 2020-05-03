@@ -23,7 +23,7 @@ struct rob : result<Tag> {
 
 template<typename Tag, typename Tag::type p>
 typename rob<Tag, p>::filler rob<Tag, p>::filler_obj;
-So, how is it used? Let's have an example
+//So, how is it used? Let's have an example
 
 struct A {
 private:
